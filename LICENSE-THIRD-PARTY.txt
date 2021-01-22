@@ -1,0 +1,15 @@
+
+Lists of 13 third-party dependencies.
+     (COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0) JSR-250 Common Annotations for the JavaTM Platform (javax.annotation:jsr250-api:1.0 - http://jcp.org/aboutJava/communityprocess/final/jsr250/index.html)
+     (Apache License, Version 2.0) CDI APIs (javax.enterprise:cdi-api:1.0 - http://www.seamframework.org/Weld/cdi-api)
+     (The Apache Software License, Version 2.0) javax.inject (javax.inject:javax.inject:1 - http://code.google.com/p/atinject/)
+     (Apache License, Version 2.0) Apache Commons Lang (org.apache.commons:commons-lang3:3.8.1 - http://commons.apache.org/proper/commons-lang/)
+     (Apache License, Version 2.0) Maven Artifact (org.apache.maven:maven-artifact:3.6.3 - https://maven.apache.org/ref/3.6.3/maven-artifact/)
+     (Apache License, Version 2.0) Maven Model (org.apache.maven:maven-model:3.6.3 - https://maven.apache.org/ref/3.6.3/maven-model/)
+     (Apache License, Version 2.0) Maven Plugin API (org.apache.maven:maven-plugin-api:3.6.3 - https://maven.apache.org/ref/3.6.3/maven-plugin-api/)
+     (Apache License, Version 2.0) Maven Plugin Tools Java Annotations (org.apache.maven.plugin-tools:maven-plugin-annotations:3.6.0 - https://maven.apache.org/plugin-tools/maven-plugin-annotations)
+     (Apache License, Version 2.0) Plexus Classworlds (org.codehaus.plexus:plexus-classworlds:2.6.0 - http://codehaus-plexus.github.io/plexus-classworlds/)
+     (The Apache Software License, Version 2.0) Plexus :: Component Annotations (org.codehaus.plexus:plexus-component-annotations:1.5.5 - http://plexus.codehaus.org/plexus-containers/plexus-component-annotations/)
+     (Apache License, Version 2.0) Plexus Common Utilities (org.codehaus.plexus:plexus-utils:3.2.1 - http://codehaus-plexus.github.io/plexus-utils/)
+     (Eclipse Public License, Version 1.0) org.eclipse.sisu.inject (org.eclipse.sisu:org.eclipse.sisu.inject:0.3.4 - http://www.eclipse.org/sisu/org.eclipse.sisu.inject/)
+     (Eclipse Public License, Version 1.0) org.eclipse.sisu.plexus (org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.4 - http://www.eclipse.org/sisu/org.eclipse.sisu.plexus/)
