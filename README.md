@@ -99,7 +99,7 @@ Using it as local dependency in project
 To use it in project, first create `lib` directory and install it there with command:
 
 ```
-mvn org.apache.maven.plugins:maven-install-plugin:2.3.1:install-file -Dfile=$HOME/.m2/repository/com/lgi/common/maven/tcp-msg-maven-plugin/0.0.1-SNAPSHOT/tcp-msg-maven-plugin-0.0.1-SNAPSHOT.jar -DpomFile=$HOME/.m2/repository/com/lgi/common/maven/tcp-msg-maven-plugin/0.0.1-SNAPSHOT/tcp-msg-maven-plugin-0.0.1-SNAPSHOT.pom -DgroupId=com.lgi.common.maven -DartifactId=tcp-msg-maven-plugin -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -DlocalRepositoryPath=./lib plugin:descriptor
+mvn org.apache.maven.plugins:maven-install-plugin:2.3.1:install-file -Dfile=$HOME/.m2/repository/com/libertyglobal/common/maven/tcp-msg-maven-plugin/1.0.0-SNAPSHOT/tcp-msg-maven-plugin-1.0.0-SNAPSHOT.jar -DpomFile=$HOME/.m2/repository/com/libertyglobal/common/maven/tcp-msg-maven-plugin/1.0.0-SNAPSHOT/tcp-msg-maven-plugin-1.0.0-SNAPSHOT.pom -DgroupId=com.libertyglobal.common.maven -DartifactId=tcp-msg-maven-plugin -Dversion=1.0.0-SNAPSHOT -Dpackaging=jar -DlocalRepositoryPath=./lib plugin:descriptor
 ```
 
 Then move the `lib` dir to your project and define it as local plugins repository for your maven:
@@ -117,9 +117,9 @@ Then you can add it as standard dependency.
 
 ```
 <dependency>
-    <groupId>com.lgi.common.maven</groupId>
+    <groupId>com.libertyglobal.common.maven</groupId>
     <artifactId>tcp-msg-maven-plugin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -128,7 +128,7 @@ Usage example
 
 ```
 <plugin>
-    <groupId>com.lgi.common.maven</groupId>
+    <groupId>com.libertyglobal.common.maven</groupId>
     <artifactId>tcp-msg-maven-plugin</artifactId>
     ...
     <executions>

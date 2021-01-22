@@ -2,7 +2,7 @@
  * If not stated otherwise in this file or this component's LICENSE file the
  * following copyright and licenses apply:
  *
- * Copyright 2020 Liberty Global B.V.
+ * Copyright 2021 Liberty Global Technology Services BV
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package main.java.com.lgi.commons.maven;
+package com.lgi.commons.maven;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -32,25 +32,47 @@ import java.net.Socket;
 import java.util.stream.IntStream;
 
 
+/**
+ *  Base Mojo for TCP messaging plug-in. It is intended to be able to send String messages into TCP socked during maven build process.
+ */
 @Mojo(name = "tcpmsg")
 public class TcpMessagingMojo extends AbstractMojo {
     private static final String LOG_PREFIX = "maven-tcpmsg";
 
+    /**
+     * Host where the messages will be sent.
+     */
     @Parameter(property = "tcpmsg.host", defaultValue = "localhost")
     private String host;
 
+    /**
+     * The total number of message sending attempts.
+     */
     @Parameter(property = "tcpmsg.repeatAmount", defaultValue = "1")
     private Integer repeatAmount;
 
+    /**
+     * Interval in seconds between sending consecutive
+     */
     @Parameter(property = "tcpmsg.intervalSec", defaultValue = "5")
     private Integer intervalSec;
 
+    /**
+     * Port where the messages will be sent. Mandatory parameter.
+     */
     @Parameter(property = "tcpmsg.port")
     private Integer port;
 
+    /**
+     * Message content to send.
+     */
     @Parameter(property = "tcpmsg.msg")
     private String msg;
 
+    /**
+     * Maven execution hook for sending TCP messages.
+     * @throws MojoExecutionException in case port is not specified.
+     */
     @Override
     public void execute() throws MojoExecutionException {
         if (port == null) {
@@ -63,6 +85,9 @@ public class TcpMessagingMojo extends AbstractMojo {
         }
     }
 
+    /**
+     * Initiates communication thread.
+     */
     private void doCommunicate() {
         Thread communicationChannel = new Thread(
                 new ThreadGroup(LOG_PREFIX),
@@ -73,6 +98,9 @@ public class TcpMessagingMojo extends AbstractMojo {
         communicationChannel.start();
     }
 
+    /**
+     * Sends preconfigured amount of messages.
+     */
     private void sendMessages() {
         IntStream.range(0, repeatAmount).forEach(attempt -> {
             sleepForConfiguredInterval();
@@ -81,6 +109,9 @@ public class TcpMessagingMojo extends AbstractMojo {
         });
     }
 
+    /**
+     * Sleep for preconfigured interval.
+     */
     private void sleepForConfiguredInterval() {
         try {
             Thread.sleep(intervalSec * 1000);
@@ -89,6 +120,10 @@ public class TcpMessagingMojo extends AbstractMojo {
         }
     }
 
+    /**
+     * Handles opening and closing socket together with appropriate readers writers.
+     * Sends the message, then reads and prints received response.
+     */
     private void handleSendAttempt() {
         try (Socket clientSocket = new Socket(host, port)) {
             try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
@@ -102,6 +137,12 @@ public class TcpMessagingMojo extends AbstractMojo {
         }
     }
 
+    /**
+     * IO streams read and write.
+     * @param in input stream to read response from.
+     * @param out output stream to write message to.
+     * @return response or null if nothing was received.
+     */
     private String communicate(BufferedReader in, PrintWriter out) {
         try {
             out.println(msg);
@@ -113,8 +154,12 @@ public class TcpMessagingMojo extends AbstractMojo {
         }
     }
 
-    private void logSocketIssue(Exception e) {
-        String warnMsg = String.format("%s: Issue with connection to TCP socket on %s:%d - %s: %s", LOG_PREFIX, host, port, e.getClass().getSimpleName(), e.getMessage());
+    /**
+     * Wrapper for logging socket related exception information.
+     * @param exception any exception caught due to socket connection handling.
+     */
+    private void logSocketIssue(Exception exception) {
+        String warnMsg = String.format("%s: Issue with connection to TCP socket on %s:%d - %s: %s", LOG_PREFIX, host, port, exception.getClass().getSimpleName(), exception.getMessage());
         getLog().warn(warnMsg);
     }
 }

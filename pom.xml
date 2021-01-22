@@ -4,9 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tcp-msg-maven-plugin-parent</artifactId>
-    <groupId>com.lgi.common.maven</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.libertyglobal.common.maven</groupId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Maven plugin for sending string messages to TCP socket</description>
+    <url>https://github.com/LibertyGlobal/tcp-msg-maven-plugin</url>
 
     <modules>
         <module>tcp-msg-maven-plugin</module>
@@ -49,6 +53,28 @@
         </license.includedLicenses>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>https://github.com/LibertyGlobal/tcp-msg-maven-plugin/LICENSE.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Liberty Global developers group</name>
+            <email>developers@libertyglobal.com</email>
+            <organization>Liberty Global</organization>
+            <organizationUrl>https://developer.libertyglobal.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/LibertyGlobal/tcp-msg-maven-plugin.git</connection>
+        <developerConnection>scm:git:ssh://github.com/LibertyGlobal/tcp-msg-maven-plugin.git</developerConnection>
+        <url>https://github.com/LibertyGlobal/tcp-msg-maven-plugin</url>
+    </scm>
+
     <dependencyManagement>
         <dependencies>
 
@@ -68,6 +94,13 @@
         </dependencies>
     </dependencyManagement>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
 
@@ -84,6 +117,61 @@
                         <phase>validate</phase>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
 
         </plugins>
