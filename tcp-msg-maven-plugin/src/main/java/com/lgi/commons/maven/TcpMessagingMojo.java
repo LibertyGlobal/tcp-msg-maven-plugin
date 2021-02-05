@@ -52,7 +52,7 @@ public class TcpMessagingMojo extends AbstractMojo {
     private Integer repeatAmount;
 
     /**
-     * Interval in seconds between sending consecutive
+     * Interval in seconds between sending consecutive messages.
      */
     @Parameter(property = "tcpmsg.intervalSec", defaultValue = "5")
     private Integer intervalSec;
